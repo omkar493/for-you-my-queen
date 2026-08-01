@@ -1,12 +1,41 @@
-const music = document.getElementById("bgMusic");
+// ==============================
+// FOR MY QUEEN ❤️
+// music.js
+// ==============================
 
-// Start music after the user clicks Begin
-document.getElementById("beginBtn").addEventListener("click", () => {
+const bgMusic = document.getElementById("bgMusic");
 
-    music.volume = 0.4;
+// Restore saved position
+window.addEventListener("load", () => {
 
-    music.play().catch(err => {
-        console.log("Music couldn't start:", err);
-    });
+    const savedTime = localStorage.getItem("musicTime");
+
+    if (savedTime) {
+        bgMusic.currentTime = parseFloat(savedTime);
+    }
+
+});
+
+// Save music position every second
+setInterval(() => {
+
+    if (!bgMusic.paused) {
+        localStorage.setItem("musicTime", bgMusic.currentTime);
+    }
+
+}, 1000);
+
+// Save before leaving page
+window.addEventListener("beforeunload", () => {
+
+    localStorage.setItem("musicTime", bgMusic.currentTime);
+
+});
+
+// Resume after song ends
+bgMusic.addEventListener("ended", () => {
+
+    bgMusic.currentTime = 0;
+    bgMusic.play();
 
 });
