@@ -44,7 +44,7 @@ languageBtn.addEventListener("click", () => {
 beginBtn.addEventListener("click", () => {
 
     // Play music
-    music.play();
+    bgMusic.play().catch(() => {});
 
     // Smooth fade
     document.body.style.transition = "1s";
