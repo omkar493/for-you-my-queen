@@ -1,109 +1,67 @@
-// =========================
+// ================================
 // FOR MY QUEEN ❤️
 // script.js
-// =========================
+// ================================
 
 const beginBtn = document.getElementById("beginBtn");
 const languageBtn = document.getElementById("languageBtn");
 const music = document.getElementById("bgMusic");
 
-const englishText = document.querySelector(".english");
-const russianText = document.querySelector(".russian");
+const english = document.querySelector(".english");
+const russian = document.querySelector(".russian");
 
-let russian = false;
+let russianMode = false;
 
-// Hide Russian at start
-if (russianText) {
-    russianText.style.display = "none";
+// Hide Russian initially
+if(russian){
+    russian.style.display="none";
 }
 
 // Language Switch
-languageBtn.addEventListener("click", () => {
+languageBtn.addEventListener("click",()=>{
 
-    russian = !russian;
+    russianMode=!russianMode;
 
-    if (russian) {
+    if(russianMode){
 
-        englishText.style.display = "none";
-        russianText.style.display = "block";
+        english.style.display="none";
+        russian.style.display="block";
 
-        languageBtn.innerHTML = "English 🇬🇧";
+        languageBtn.innerHTML="English 🇬🇧";
 
-    } else {
+    }else{
 
-        englishText.style.display = "block";
-        russianText.style.display = "none";
+        english.style.display="block";
+        russian.style.display="none";
 
-        languageBtn.innerHTML = "Русский 🇷🇺";
+        languageBtn.innerHTML="Русский 🇷🇺";
 
     }
 
 });
 
 // Begin Button
-beginBtn.addEventListener("click", () => {
 
-    // Play music
-    bgMusic.play().catch(() => {});
+beginBtn.addEventListener("click",()=>{
 
-    // Smooth fade
-    document.body.style.transition = "1s";
+    music.play().catch(()=>{});
 
-    // Little animation
-    beginBtn.innerHTML = "❤️ Happy Birthday ❤️";
+    // Fade out welcome card
+    document.querySelector(".card").style.opacity="0";
+    document.querySelector(".card").style.transform="scale(.9)";
 
-    beginBtn.style.transform = "scale(1.08)";
+    setTimeout(()=>{
 
-    setTimeout(() => {
-        beginBtn.style.transform = "scale(1)";
-    },300);
+        document.querySelector(".card").style.display="none";
 
-    // Small message
-    setTimeout(() => {
+        // Scroll to first story
+        document.getElementById("letter").scrollIntoView({
+            behavior:"smooth"
+        });
 
-        alert(
-`Happy Birthday ❤️
+        // Allow scrolling
+        document.body.style.overflowY="auto";
 
-This website was made especially for you.
-
-Thank you for existing.
-
-Now enjoy your little surprise ✨`
-        );
-
-    },700);
+    },900);
 
 });
-
-
-// Floating Heart Every 2 Seconds
-setInterval(() => {
-
-    const heart = document.createElement("div");
-
-    heart.innerHTML = "❤️";
-
-    heart.style.position = "fixed";
-    heart.style.left = Math.random()*100+"vw";
-    heart.style.bottom = "-40px";
-    heart.style.fontSize = (20+Math.random()*30)+"px";
-    heart.style.zIndex = "9999";
-    heart.style.pointerEvents = "none";
-    heart.style.transition = "all 8s linear";
-
-    document.body.appendChild(heart);
-
-    setTimeout(()=>{
-
-        heart.style.bottom="110vh";
-        heart.style.opacity="0";
-
-    },100);
-
-    setTimeout(()=>{
-
-        heart.remove();
-
-    },8000);
-
-},2000);
