@@ -42,26 +42,12 @@ languageBtn.addEventListener("click",()=>{
 
 // Begin Button
 
-beginBtn.addEventListener("click",()=>{
+// Begin Button
 
-    music.play().catch(()=>{});
+beginBtn.addEventListener("click", () => {
 
-    // Fade out welcome card
-    document.querySelector(".card").style.opacity="0";
-    document.querySelector(".card").style.transform="scale(.9)";
+    music.play().catch(() => {});
 
-    setTimeout(()=>{
-
-        document.querySelector(".card").style.display="none";
-
-        // Scroll to first story
-        document.getElementById("letter").scrollIntoView({
-            behavior:"smooth"
-        });
-
-        // Allow scrolling
-        document.body.style.overflowY="auto";
-
-    },900);
+    window.location.href = "letter.html";
 
 });
